@@ -73,7 +73,7 @@ def substrings(str)
   #str_array = str.split('')
   (0..str.length - 1).each do |i|
     (i..str.length - 1).each do |j|
-      result << str[i..j]
+      result << str[i..j] unless result.include?(str[i..j])
     end
   end
   result
@@ -114,7 +114,6 @@ end
 def number_guessing_game
   target_number = rand(100) + 1
   guess_number = 0
-  puts target_number
   
   until guess_number == target_number
     puts "Guess a number"
@@ -131,8 +130,8 @@ class Student
   attr_accessor :first_name, :last_name, :courses
   
   def initialize(first_name, last_name)
-    @first_name = first_name
-    @last_name = last_name
+    @first_name = first_name.capitalize
+    @last_name = last_name.capitalize
     @courses = []
   end
   
@@ -142,6 +141,7 @@ class Student
   
   def enroll(new_course)
     return "Time conflict" if has_conflict?(new_course)
+    return if 
     courses << new_course
     new_course.students << self
   end
